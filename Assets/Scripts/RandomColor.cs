@@ -1,10 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RandomColor : MonoBehaviour
+namespace DefaultNamespace
 {
-    private void Start()
+    /// <summary>
+    /// Utility component that assigns a random color to the attached Image component.
+    /// Useful for demo/testing purposes to visually distinguish elements.
+    /// </summary>
+    public class RandomColor : MonoBehaviour
     {
-        GetComponent<Image>().color = new Color(Random.value, Random.value, Random.value);
+        private void Start()
+        {
+            var image = GetComponent<Image>();
+            if (image != null)
+            {
+                image.color = new Color(Random.value, Random.value, Random.value);
+            }
+            else
+            {
+                Debug.LogWarning($"[RandomColor] No Image component found on {gameObject.name}");
+            }
+        }
     }
 }
